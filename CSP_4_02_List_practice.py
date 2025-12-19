@@ -9,6 +9,14 @@ def bookends(li: list):
     :param list:
     :return:
     """
+    x =li[0]
+    y = li[-1]
+    li.pop(0)
+    li.pop(-1)
+    out = [x,y]
+    print(li)
+    return out
+#print(bookends([1,2,3,4,5]))
 
 
 
@@ -18,6 +26,14 @@ def inOrder(li : list):
     :param list:
     :return:
     """
+    i = 0
+    while i < len(li)-1:
+        if li[i] > li[i +1]:
+            return False
+        elif li[i] < li[i +1]:
+            i += i + 1
+    return True
+#print(inOrder([1,7,5,6,8]))
 
 
 
@@ -38,8 +54,13 @@ def find(li: list, target : int):
     :param target:
     :return:
     """
-
-
+    for ans in range(0,len(li),1):
+        if li[ans] != target:
+            ans += 1
+        elif target == li[ans]:
+            return ans
+    return -1
+#print(find([3, 7, 8, 1, 0, 1, 12],12))
 def removeLowest(li):
     """
     Given a list of numbers remove the lowest element from the list. You may assume the list is at least 1 element long.
@@ -48,8 +69,15 @@ def removeLowest(li):
     :param list:
     :return:
     """
-
-
+    i =0
+    small = li[0]
+    while i < len(li):
+        if li[i] < small:
+            small = li[i]
+        i += 1
+    li.remove(small)
+    return li
+#print(removeLowest([3,6,7,2,12]))
 def keepOrder(li: list, value):
     """
     Given a list of numbers that is in order and a value. Place the value into the
@@ -59,8 +87,13 @@ def keepOrder(li: list, value):
     :param value:
     :return:
     """
-
-
+    for i in range(0,len(li),1):
+        if value < li[i]:
+            li.insert(i,value)
+            return li
+    li.append(value)
+    return li
+print(keepOrder([1,3,5,6],40))
 def merge(l1:list, l2:list):
     """
     Given two lists that are in order. produce a new list that is the two lists merged together and in order.
@@ -70,4 +103,24 @@ def merge(l1:list, l2:list):
     :param l2:
     :return:
     """
-    
+    i = 0
+    n = 0
+    newList = []
+    while i < len(l1) and n < len(l2):
+        if l1[i] < l2[n]:
+            newList.append(l1[i])
+            i += 1
+        else:
+            newList.append(l2[n])
+            n += 1
+    while n < len(l2):
+        newList.append(l2[n])
+        n += 1
+    while i < len(l1):
+        newList.append(l1[i])
+        i += 1
+    return newList
+print(merge([1,3,5],[2,4,6]))
+
+
+
